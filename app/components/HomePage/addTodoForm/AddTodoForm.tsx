@@ -1,12 +1,14 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { Field, Formik , Form} from 'formik';
 import { ITodoSliceState } from '@/lib/features/counter/types';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { z } from 'zod';
 import { useAppDispatch } from '@/lib/hooks';
 import { addTodo } from '@/lib/features/counter/todoSlice';
+import styles from './AddTodoForm.module.css';
+import { Button, Input } from 'antd';
 
 interface IaddFTodoCredentials extends Omit<ITodoSliceState, 'status' | 'id'> {}
 export const AddTodoForm: React.FC = () => {
@@ -30,6 +32,7 @@ export const AddTodoForm: React.FC = () => {
       }}
       onSubmit={(
         values: IaddFTodoCredentials,
+        { resetForm }
       ) => {
         const result : IaddFTodoCredentials= {
           ...values,
@@ -37,11 +40,14 @@ export const AddTodoForm: React.FC = () => {
         }
         console.log(result);
         dispatch(addTodo(result))
+        resetForm()
+        setTextareaValue('')
       }
     }
     >
-      {({ errors, touched, resetForm }) => (
-        <Form className="space-y-6" action="#" method="POST" style={{border: '1px solid red'}} >
+      {({ errors, touched }) => (
+        <Form className={styles.form} action="#" method="POST" >
+          <h2>Add Task</h2>
         <div>
           <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">
             Title
@@ -96,15 +102,13 @@ export const AddTodoForm: React.FC = () => {
             {errors.description && touched.description ? <div style={{color: 'red'}}>{errors.description}</div> : null}
           </div>
         </div>
-
-        <div>
-          <button
-            type="submit"
-            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Add todo
-          </button>
-        </div>
+        <Button
+          htmlType="submit"
+          type='primary'
+          className={styles.btnSub}
+        >
+          Add todo
+        </Button>
       </Form>
       )}
     </Formik>

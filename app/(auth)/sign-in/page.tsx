@@ -1,6 +1,7 @@
 'use client'
 
 import { SignInPage } from "@/app/components/SignInPage/SignInPage";
+import { Spin } from "antd";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useLayoutEffect } from "react";
@@ -15,7 +16,7 @@ function SignIn() : JSX.Element {
   })
 
   return (
-    status === 'loading'  || status === 'authenticated'? <div>wait a momen</div>
+    status === 'loading'  || status === 'authenticated'? <Spin size="large" />
     :  <SignInPage/>
    );
 }

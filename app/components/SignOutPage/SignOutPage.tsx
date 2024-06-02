@@ -1,4 +1,5 @@
 'use client'
+import { Button } from "antd";
 import{ signOut, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -13,7 +14,7 @@ export const SignOutPage = () : JSX.Element => {
 
   return (
     <div>
-      <button onClick={()=>signOut()}>log out</button>
+      <Button type="primary" danger onClick={()=>signOut()}>log out</Button>
     </div>
   )
 }

@@ -6,6 +6,9 @@ import { ITodoSliceState } from '@/lib/features/counter/types';
 import { useAppDispatch } from '@/lib/hooks';
 import { IEditFTodoCredentials, IEditItemFormProps } from './types';
 import { editTodo } from '@/lib/features/counter/todoSlice';
+import TextArea from 'antd/es/input/TextArea';
+import { Button, Checkbox, Flex, Space } from 'antd';
+import styles from './EditItemForm.module.css';
 
 
 export const EditItemForm= (props: IEditItemFormProps): JSX.Element => {
@@ -38,29 +41,31 @@ export const EditItemForm= (props: IEditItemFormProps): JSX.Element => {
     >
       {({ errors, touched, resetForm }) => (
         <Form action="#" method="POST" >
-          <label htmlFor="description">
-            description
-          </label>
-          <textarea
-            value={textareaValue}
-            onChange={(e)=>setTextareaValue(e.target.value)}
-            id="description" 
-            name="description" 
-            placeholder="some email" 
-          />
+          <Space direction="vertical"> 
 
-          <label htmlFor="status">
-            completed
-          </label>
-          <input
-            checked={completed}
-            onChange={()=>setCompleted((prevState)=>!prevState)}
-            id="status" 
-            name="status" 
-            placeholder="some email" 
-            type="checkbox"
-          />
-          <button type='submit'>save</button>
+            <label htmlFor="status">
+              completed: 
+              <Checkbox
+                checked={completed}
+                onChange={()=>setCompleted((prevState)=>!prevState)}
+                id="status" 
+                name="status"  
+              />
+            </label>
+
+
+            <label htmlFor="description">
+              description
+              <TextArea rows={4}
+                value={textareaValue}
+                onChange={(e)=>setTextareaValue(e.target.value)}
+                id="description" 
+                name="description" 
+                placeholder="some email" 
+              />
+            </label>
+            <Button type='primary' htmlType='submit'>save</Button>
+          </Space>
       </Form>
       )}
     </Formik>
