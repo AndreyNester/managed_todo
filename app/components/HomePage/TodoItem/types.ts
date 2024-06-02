@@ -1,4 +1,4 @@
-import { ITodoSliceState } from "@/lib/features/counter/types";
+import { ITodoSliceState } from "@/lib/features/todo/types";
 import { DetailedHTMLProps, LiHTMLAttributes } from "react";
 
 

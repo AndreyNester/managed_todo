@@ -1,4 +1,4 @@
-import { ISignInCredentials } from '@/app/components/SignInPage/signInForm/types';
+import { ISignInCredentials } from '@/lib/features/forms/signInForm/types';
 import { NextRequest, NextResponse } from 'next/server';
 
 

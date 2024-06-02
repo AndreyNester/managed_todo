@@ -1,4 +1,4 @@
-import { SignInForm } from "./signInForm/signInForm";
+import { SignInForm } from "../../../lib/features/forms/signInForm/signInForm";
 
 /* eslint-disable @next/next/no-img-element */
 

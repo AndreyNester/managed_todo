@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ITodoItemProps } from "./types"
-import { EditItemForm } from "../EditItemForm/EditItemForm"
+import { EditItemForm } from "../../../../lib/features/forms/EditItemForm/EditItemForm"
 import { Button, Card } from "antd"
 
 

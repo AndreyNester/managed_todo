@@ -2,11 +2,11 @@
 
 import React, { FormEvent, useState } from 'react';
 import { Field, Formik , Form} from 'formik';
-import { ITodoSliceState } from '@/lib/features/counter/types';
+import { ITodoSliceState } from '@/lib/features/todo/types';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { z } from 'zod';
 import { useAppDispatch } from '@/lib/hooks';
-import { addTodo } from '@/lib/features/counter/todoSlice';
+import { addTodo } from '@/lib/features/todo/todoSlice';
 import styles from './AddTodoForm.module.css';
 import { Button, Input } from 'antd';
 

@@ -1,4 +1,4 @@
-import { ITodoSliceState } from "@/lib/features/counter/types";
+import { ITodoSliceState } from "@/lib/features/todo/types";
 import { Dispatch, SetStateAction } from "react";
 
 export interface IEditFTodoCredentials extends Pick<ITodoSliceState, 'description' | 'status'> {}

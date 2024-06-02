@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { Formik , Form} from 'formik';
-import { ITodoSliceState } from '@/lib/features/counter/types';
+import { ITodoSliceState } from '@/lib/features/todo/types';
 import { useAppDispatch } from '@/lib/hooks';
 import { IEditFTodoCredentials, IEditItemFormProps } from './types';
-import { editTodo } from '@/lib/features/counter/todoSlice';
+import { editTodo } from '@/lib/features/todo/todoSlice';
 import TextArea from 'antd/es/input/TextArea';
 import { Button, Checkbox, Flex, Space } from 'antd';
 import styles from './EditItemForm.module.css';
