@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useAppSelector } from "@/lib/hooks";
-import { proccessArr } from './utils/fulterArr';
+import { proccessArr } from './utils/proccessArr';
 import { AddTodoForm } from '../../../lib/features/forms/addTodoForm/AddTodoForm';
 import { FITodoSliceState } from './types';
 import { TodoItem } from './TodoItem/TodoItem';
@@ -39,6 +39,7 @@ export const HomePage = () : JSX.Element=> {
     const limit = 3;
     const proccessedArr = proccessArr(values, todos)
     const shownTodos = [...proccessedArr].slice((currentBunch -1 )*limit, currentBunch * limit);
+    
     const renderContent = (userType: 'user' | 'admin') : JSX.Element => (
       <>
         <div className={styles.filtersList}>
