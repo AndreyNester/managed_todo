@@ -1,5 +1,5 @@
-import { ITodoSliceState } from "@/lib/features/counter/todoSlice";
-import { FITodoSliceState } from "../HomePage";
+import { ITodoSliceState } from "@/lib/features/counter/types";
+import { FITodoSliceState } from "../types";
 
 export const filterArr = (values : FITodoSliceState, data : ITodoSliceState[]) : ITodoSliceState[] => {
   const {description, email, id, status, title} = values;

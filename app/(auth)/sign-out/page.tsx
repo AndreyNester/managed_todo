@@ -10,10 +10,11 @@ function SignOut() : JSX.Element {
   const router = useRouter();
 
   useLayoutEffect(()=>{
-    if (status!=='authenticated') router.push('/sign-in') 
+    if (status==='unauthenticated') router.push('/sign-in') 
   })
   return ( 
-    <SignOutPage/>
+    status === 'loading' || status === 'unauthenticated' ? <div>wait a moemtn</div>
+    : <SignOutPage/>
    );
 }
 

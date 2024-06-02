@@ -15,7 +15,8 @@ function SignIn() : JSX.Element {
   })
 
   return (
-    <SignInPage/>
+    status === 'loading'  || status === 'authenticated'? <div>wait a momen</div>
+    :  <SignInPage/>
    );
 }
 

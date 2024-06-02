@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Field, Formik , Form} from 'formik';
-import { ITodoSliceState } from '@/lib/features/counter/todoSlice';
+import { ITodoSliceState } from '@/lib/features/counter/types';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { z } from 'zod';
 import { useAppDispatch } from '@/lib/hooks';

@@ -1,4 +1,4 @@
-import { ITodoSliceState } from "./todoSlice";
+import { ITodoSliceState } from "./types";
 
 export const dataBase : ITodoSliceState[] = [
   {

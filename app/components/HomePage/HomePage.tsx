@@ -9,10 +9,10 @@ import { useAppSelector } from "@/lib/hooks";
 import { filterArr } from './utils/fulterArr';
 import { AddTodoForm } from './addTodoForm/AddTodoForm';
 import { FITodoSliceState } from './types';
+import { TodoItem } from './TodoItem/TodoItem';
 
 export const HomePage = () : JSX.Element=> {
   const [ currentBunch, setCurrentBunch ] = useState<number>(1);
-  const [editMode, setEditMode] = useState<boolean>(false)
 
   const initialInputsValue : FITodoSliceState = {
     description : '',
@@ -27,7 +27,6 @@ export const HomePage = () : JSX.Element=> {
   
   const session = useSession();
   const status = session.status;
-  const userType = session.data?.user.type;
   const router = useRouter();
 
   useEffect(()=>{
@@ -35,7 +34,7 @@ export const HomePage = () : JSX.Element=> {
   }, [values])
 
   useLayoutEffect(()=>{
-    if (status !=='authenticated') router.push('/sign-in') 
+    if (status ==='unauthenticated') router.push('/sign-in') 
   }, [])
     const limit = 3;
     const filteredArr = filterArr(values, todos)
@@ -43,52 +42,41 @@ export const HomePage = () : JSX.Element=> {
 
     console.log(session);
 
-    const renderContent = () : JSX.Element => (
+    const renderContent = (userType: 'user' | 'admin') : JSX.Element => (
       <>
+        <Link href='/sign-in' >to sign in</Link>
+        <Link href='/sign-out' >to sign out</Link>
+        <label htmlFor="id">
+          id : <input type="text" name='id' value={values.id} onChange={(e)=>setValues((prevState)=>({...prevState, id : e.target.value}))}/>
+        </label>
+        <label htmlFor="title">
+          title : <input type="text" name='title' value={values.title} onChange={(e)=>setValues((prevState)=>({...prevState, title : e.target.value}))}/>
+        </label>
+        <label htmlFor="email">
+          email : <input type="text" name='email' value={values.email} onChange={(e)=>setValues((prevState)=>({...prevState, email : e.target.value}))}/>
+        </label>
+        <label htmlFor="description">
+          descriptiom : <input type="text" name='description' value={values.description} onChange={(e)=>setValues((prevState)=>({...prevState, description : e.target.value}))}/>
+        </label>
+        <label htmlFor="status">
+          in progress: <input type="radio" name='status' onChange={()=>setValues((prevState)=>({...prevState, status : 'in progress'}))}/>
+          completed : <input type="radio" name='status' onChange={()=>setValues((prevState)=>({...prevState, status : 'completed'}))}/>
+          all :  <input type="radio" name='status' defaultChecked onChange={()=>setValues((prevState)=>({...prevState, status : 'all'}))}/>
+        </label>
 
-      <Link href='/sign-in' >to sign in</Link>
-      <Link href='/sign-out' >to sign out</Link>
-      <label htmlFor="id">
-        id : <input type="text" name='id' value={values.id} onChange={(e)=>setValues((prevState)=>({...prevState, id : e.target.value}))}/>
-      </label>
-      <label htmlFor="title">
-        title : <input type="text" name='title' value={values.title} onChange={(e)=>setValues((prevState)=>({...prevState, title : e.target.value}))}/>
-      </label>
-      <label htmlFor="email">
-        email : <input type="text" name='email' value={values.email} onChange={(e)=>setValues((prevState)=>({...prevState, email : e.target.value}))}/>
-      </label>
-      <label htmlFor="description">
-        descriptiom : <input type="text" name='description' value={values.description} onChange={(e)=>setValues((prevState)=>({...prevState, description : e.target.value}))}/>
-      </label>
-      <label htmlFor="status">
-        in progress: <input type="radio" name='status' onChange={()=>setValues((prevState)=>({...prevState, status : 'in progress'}))}/>
-        completed : <input type="radio" name='status' onChange={()=>setValues((prevState)=>({...prevState, status : 'completed'}))}/>
-        all :  <input type="radio" name='status' defaultChecked onChange={()=>setValues((prevState)=>({...prevState, status : 'all'}))}/>
-      </label>
-  
-      <ul>
-        {shownTodos.map((item, index)=> (
-        <li key={index} style={{border: '1px solid black'}}>
-          <h2>Title: {item.title}</h2>
-          <p>Email: {item.email}</p>
-          <p>ID: {item.id}</p>
-          <p>status: {item.status}</p>
-          <p>description: {item.description}</p>
-          <button type='button' onClick={()=>setEditMode((prevState)=>!prevState)}>Edit</button>
-        </li>
-        ) )}
-      </ul>
-  
-      <AddTodoForm/>
-      
-      <Pagination defaultCurrent={currentBunch} total={filteredArr.length} defaultPageSize={3} onChange={(e)=>setCurrentBunch(e)}/>
-    </>
+        <ul>
+          {shownTodos.map((item)=> (
+          <TodoItem userType={userType} todoInfo={item} key={item.id} style={{border: '1px solid black'}} />
+          ) )}
+        </ul>
+        
+        <AddTodoForm/>
+        
+        <Pagination defaultCurrent={currentBunch} total={filteredArr.length} defaultPageSize={3} onChange={(e)=>setCurrentBunch(e)}/>
+      </>
     )
     
     
-  return (
-    status ==='loading' ? <div>wait a moment</div> 
-    :
-    renderContent()
+   return (renderContent(session.data?.user.type as 'user' | 'admin')  
   )
 }
