@@ -1,6 +1,6 @@
-import { FormProps } from "antd";
-import { FieldType } from "../types";
+import { FormProps } from "antd"
+import { FieldType } from "../types"
 
-export const onFinishFailed: FormProps<FieldType>['onFinishFailed'] = (errorInfo) => {
-  console.log('Failed:', errorInfo);
-};
+export const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+    console.log("Failed:", errorInfo)
+}
